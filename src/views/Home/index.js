@@ -3,13 +3,13 @@ import PokContext from '../../context/pokemons';
 import PokList from './components/PokList';
 
 export default function Home () {
-  const { getPok, poks } = useContext(PokContext);
+  const { getPok, poks, isLoading } = useContext(PokContext);
   useEffect(() => {
     getPok().catch(null);
-  }, [getPok]);
-  return (
-    <div>
-      <PokList poks={poks} />
-    </div>
-  );
+  }, []);
+
+  if (isLoading) {
+    return (<p> Loading results</p>);
+  }
+  return <PokList poks={poks} />;
 }

@@ -4,13 +4,19 @@ import PokContext from '../../context/pokemons';
 
 export default function PokDetail () {
   const { id } = useParams();
-  const { getPoksDetail } = useContext(PokContext);
+  const { getPoksDetails, pokDetail, isLoading } = useContext(PokContext);
   useEffect(() => {
-    getPoksDetail(id).catch(null);
-  }, [getPoksDetail, id]);
+    getPoksDetails(id).catch(null);
+  }, []);
+  console.log(pokDetail);
+  if (isLoading === true) {
+    return (<p>Loading pokemon information</p>);
+  }
   return (
     <div>
-      PokDetail
+      <p>{`Name: ${pokDetail?.name}`}</p>
+      <p>{`Weight: ${pokDetail?.weight} kg`}</p>
+      <p>{`Hight: ${pokDetail?.height} cm`}</p>
     </div>
   );
 }

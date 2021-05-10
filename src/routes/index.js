@@ -3,10 +3,12 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Home from '../views/Home';
 import NotFound from '../views/404';
 import PokDetail from '../views/PokDetail';
+import ScrollToTop from '../components/ScrollToTop';
 
 export default function Routes () {
   return (
     <Router>
+      <ScrollToTop />
       <Switch>
         <Route path='/' exact>
           <Home />
