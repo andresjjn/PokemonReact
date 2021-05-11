@@ -4,7 +4,7 @@ import PokProvider from './context/pokemons/Provider';
 
 function App () {
   return (
-    <PokProvider>
+    <PokProvider classname='provider'>
       <Routes />
     </PokProvider>
   );

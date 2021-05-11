@@ -6,13 +6,20 @@ export default function PokProvider ({ children }) {
   const [poks, setPoks] = useState([]);
   const [pokDetail, setPokDetail] = useState({});
   const [isLoading, setIsLoading] = useState(false);
+  const [hasError, setHasError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
+
   const getPok = async () => {
     try {
       setIsLoading(true);
+      setHasError(false);
+      setErrorMessage('');
       const pokResults = await apiCall({ url: 'https://pokeapi.co/api/v2/pokemon?limit=100' });
       setPoks(pokResults.results);
     } catch (error) {
-      setPoks([]);
+      setPoks({});
+      setHasError(true);
+      setErrorMessage('Something is wrong with your internet conection or the PokeAPI');
     } finally {
       setIsLoading(false);
     }
@@ -24,10 +31,14 @@ export default function PokProvider ({ children }) {
     }
     try {
       setIsLoading(true);
+      setHasError(false);
+      setErrorMessage('');
       const resPokDetail = await apiCall({ url: `https://pokeapi.co/api/v2/pokemon/${id}` });
       setPokDetail(resPokDetail);
     } catch {
       setPokDetail({});
+      setHasError(true);
+      setErrorMessage('Something is wrong with your internet conection or the PokeAPI');
     } finally {
       setIsLoading(false);
     }
@@ -39,7 +50,9 @@ export default function PokProvider ({ children }) {
       poks,
       getPoksDetails,
       pokDetail,
-      isLoading
+      isLoading,
+      hasError,
+      errorMessage
     }}
     >
       {children}
