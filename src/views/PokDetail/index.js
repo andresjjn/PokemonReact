@@ -1,4 +1,4 @@
-import { useEffect, useContext } from 'react';
+import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 // import PokContext from '../../context/pokemons';
 import PokStats from './components/PokStats';
@@ -18,13 +18,13 @@ export default function PokDetail () {
   }));
   useEffect(() => {
     getPoksDetails(id).catch(null);
-  }, []);
+  }, [getPoksDetails, id]);
   console.log(pokDetail);
   if (isLoading === true) {
     return <Loading title='Loading Pokemon' />;
   }
   return (
-    <div>
+    <div className='pokinfo'>
       {hasError
         ? <ErrorMessage message={errorMessage} />
         : (

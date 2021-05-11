@@ -5,9 +5,8 @@ export default function PokListitem ({ name, url }) {
 
   return (
     <>
-      <p> {name} </p>
-      <button>
-        <Link to={`/pokemon/${getId()}`}> See details </Link>
+      <button className='poklist'>
+        <Link to={`/pokemon/${getId()}`} className='poktext'> {name} </Link>
       </button>
     </>
   );

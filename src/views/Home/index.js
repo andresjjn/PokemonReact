@@ -1,4 +1,4 @@
-import { useContext, useEffect } from 'react';
+import { useEffect } from 'react';
 // import PokContext from '../../context/pokemons';
 import PokList from './components/PokList';
 import Loading from '../../components/hooks/Loading';
