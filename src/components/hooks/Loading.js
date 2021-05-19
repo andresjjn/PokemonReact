@@ -1,16 +1,12 @@
-export default function Loading ({ title }) {
+export default function Loading () {
   return (
-    <div>
-      <img
-        src='https://flevix.com/wp-content/uploads/2019/07/Curve-Loading.gif'
-        alt='Loading'
-        width='500'
-        style={{
-          display: 'flex',
-          alignContent: 'center'
-        }}
-      />
-      <p>{title}</p>
-    </div>
+    <img
+      className='isLoading'
+      src='https://i.pinimg.com/originals/66/89/dc/6689dc331be27e66349ce9a4d15ddff3.gif'
+      alt='Loading'
+      style={{
+        width: '30%'
+      }}
+    />
   );
 }

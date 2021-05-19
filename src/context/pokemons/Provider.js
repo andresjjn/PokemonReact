@@ -14,10 +14,10 @@ export default function PokProvider ({ children }) {
       setIsLoading(true);
       setHasError(false);
       setErrorMessage('');
-      const pokResults = await apiCall({ url: 'https://pokeapi.co/api/v2/pokemon?limit=100' });
+      const pokResults = await apiCall({ url: 'https://pokeapi.co/api/v2/pokemon?limit=150' });
       setPoks(pokResults.results);
     } catch (error) {
-      setPoks({});
+      setPoks([]);
       setHasError(true);
       setErrorMessage('Something is wrong with your internet conection or the PokeAPI');
     } finally {

@@ -4,8 +4,8 @@ import apiCall from '../../api';
 const usePoksStore = create((set, get) => ({
   getPok: async () => {
     try {
-      set({ isLoading: true, errorMessage: '', hasError: false });
-      const pokResults = await apiCall({ url: 'https://pokeapi.co/api/v2/pokemon?limit=100' });
+      set({ errorMessage: '', hasError: false });
+      const pokResults = await apiCall({ url: 'https://pokeapi.co/api/v2/pokemon?limit=150' });
       set({ poks: pokResults.results });
     } catch (error) {
       set({ poks: [], hasError: true, errorMessage: 'Verify your internet connection' });
@@ -22,7 +22,7 @@ const usePoksStore = create((set, get) => ({
       set({ isLoading: true, hasError: false, errorMessage: '' });
       const resPokDetail = await apiCall({ url: `https://pokeapi.co/api/v2/pokemon/${id}` });
       set({ pokDetail: resPokDetail });
-    } catch (errpr) {
+    } catch (error) {
       set({
         pokDetail: {},
         hasError: true,
@@ -32,10 +32,33 @@ const usePoksStore = create((set, get) => ({
       set({ isLoading: false });
     }
   },
+  handleSearchClick: async (searchText) => {
+    set({ isAtTop: true });
+    const lowCasSearchText = searchText.toLowerCase();
+    await get().getPok();
+    const pokresults = await get().poks;
+    if (searchText != '') {
+      if (pokresults?.length) {
+        const filteredData = pokresults.filter((value) => (
+          value.name.toLowerCase().includes(lowCasSearchText)
+        ));
+        set({ poks: filteredData });
+      } else {
+        set({ poks: [] });
+      }
+    } else {
+      set({ poks: get().poks });
+    }
+  },
+  handleCloseClick: () => {
+    set({ isAtTop: false });
+    set({ results: [] });
+  },
   pokDetail: {},
   isLoading: false,
   hasError: false,
-  errorMessage: ''
+  errorMessage: '',
+  isAtTop: false
 }));
 
 export default usePoksStore;

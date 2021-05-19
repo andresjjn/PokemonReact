@@ -5,6 +5,7 @@ import PokStats from './components/PokStats';
 import Loading from '../../components/hooks/Loading';
 import ErrorMessage from '../../components/hooks/ErrorMessage';
 import usePoksStore from '../../zustand/stores/pokemon';
+import HomeButton from '../../components/hooks/HomeButton';
 
 export default function PokDetail () {
   const { id } = useParams();
@@ -19,9 +20,8 @@ export default function PokDetail () {
   useEffect(() => {
     getPoksDetails(id).catch(null);
   }, [getPoksDetails, id]);
-  console.log(pokDetail);
   if (isLoading === true) {
-    return <Loading title='Loading Pokemon' />;
+    return <Loading />;
   }
   return (
     <div className='pokinfo'>
@@ -29,6 +29,7 @@ export default function PokDetail () {
         ? <ErrorMessage message={errorMessage} />
         : (
           <>
+            <HomeButton />
             <h3 style={{ marginTop: 15, marginBottom: 15 }}> General info </h3>
             <p>{`Name: ${pokDetail?.name}`}</p>
             <p>{`Weight: ${pokDetail?.weight} kg`}</p>

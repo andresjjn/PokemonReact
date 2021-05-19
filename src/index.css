@@ -1,5 +1,8 @@
 body {
   margin: 0;
-  color: white;
-  background: black;
+  background: rgba(28,131,174,255) url('./images/wallpaper.gif');
+  background-size:100%;
+  background-repeat:no-repeat;
+  background-attachment:fixed;
+  background-position:bottom right;
 }
