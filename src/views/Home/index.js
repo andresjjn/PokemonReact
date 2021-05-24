@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 // import PokContext from '../../context/pokemons';
 import PokList from './components/PokList';
 import Loading from '../../components/hooks/Loading';
@@ -9,7 +8,7 @@ import HomeButton from '../../components/hooks/HomeButton';
 import SearchBox from '../../components/hooks/SearchBox';
 
 export default function Home () {
-  const { getPok, poks, isLoading, hasError, errorMessage, handleSearchClick, handleCloseClick } = usePoksStore(state => ({
+  const { poks, isLoading, hasError, errorMessage, handleSearchClick, handleCloseClick } = usePoksStore(state => ({
     getPok: state.getPok,
     poks: state.poks,
     isLoading: state.isLoading,

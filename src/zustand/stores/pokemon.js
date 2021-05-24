@@ -37,17 +37,18 @@ const usePoksStore = create((set, get) => ({
     const lowCasSearchText = searchText.toLowerCase();
     await get().getPok();
     const pokresults = await get().poks;
-    if (searchText != '') {
+
+    if (searchText === 'close') {
+      set({ poks: [] });
+    } else if (searchText === '') {
+      set({ poks: get().poks });
+    } else {
       if (pokresults?.length) {
         const filteredData = pokresults.filter((value) => (
           value.name.toLowerCase().includes(lowCasSearchText)
         ));
         set({ poks: filteredData });
-      } else {
-        set({ poks: [] });
       }
-    } else {
-      set({ poks: get().poks });
     }
   },
   handleCloseClick: () => {

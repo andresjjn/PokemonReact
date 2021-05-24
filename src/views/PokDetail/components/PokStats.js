@@ -1,12 +1,18 @@
-export default function PokStats ({ stats }) {
+import PokeGraph from './PokeGraph';
+
+export default function PokStats ({ pokDetail }) {
+  const data = [];
+  if (Object.entries(pokDetail).length !== 0) {
+    for (let i = 0; i < 6; i++) {
+      const obj = {};
+      obj.hability = pokDetail.stats[i].stat.name;
+      obj[pokDetail.name] = pokDetail.stats[i].base_stat;
+      data[i] = obj;
+    }
+  }
   return (
     <>
-      {stats?.map((base, index) => (
-        <div key={index}>
-          <p> {base.stat.name} </p>
-          <p> {`: ${base.base_stat}`} </p>
-        </div>
-      ))}
+      <PokeGraph data={data} pokemon={pokDetail.name} />
     </>
   );
 }

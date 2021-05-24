@@ -7,6 +7,7 @@ import ErrorMessage from '../../components/hooks/ErrorMessage';
 import usePoksStore from '../../zustand/stores/pokemon';
 import HomeButton from '../../components/hooks/HomeButton';
 
+
 export default function PokDetail () {
   const { id } = useParams();
   // const { getPoksDetails, pokDetail, isLoading, hasError, errorMessage } = useContext(PokContext);
@@ -23,6 +24,13 @@ export default function PokDetail () {
   if (isLoading === true) {
     return <Loading />;
   }
+  const imageId = (id) => {
+    if (id >= 100) {
+      return `${id}`;
+    }
+    id <= 9 ? id = `00${id}` : id = `0${id}`;
+    return id;
+  };
   return (
     <div className='pokinfo'>
       {hasError
@@ -30,13 +38,24 @@ export default function PokDetail () {
         : (
           <>
             <HomeButton />
-            <h3 style={{ marginTop: 15, marginBottom: 15 }}> General info </h3>
-            <p>{`Name: ${pokDetail?.name}`}</p>
-            <p>{`Weight: ${pokDetail?.weight} kg`}</p>
-            <p>{`Hight: ${pokDetail?.height} cm`}</p>
-            <div>
-              <h3 style={{ marginTop: 30, marginBottom: 15 }}> Habilities </h3>
-              <PokStats stats={pokDetail?.stats ?? []} />
+            <div className='info'>
+              <h1
+                style={{
+                  paddingTop: '5%'
+                }}
+              > {`${pokDetail?.name}`}
+              </h1>
+              <img src={`https://images.gameinfo.io/pokemon/256/${imageId(id)}-00.webp`} alt='Pokemón' />
+              <p>{`Weight: ${pokDetail?.weight} kg`}</p>
+              <p>{`Hight: ${pokDetail?.height} m`}</p>
+              <br />
+              <h2> Habilities </h2>
+              {pokDetail.stats?.map((base, index) => (
+                <div key={index}>
+                  <p> {`${base.stat.name} : ${base.base_stat}`} </p>
+                </div>
+              ))}
+              <PokStats pokDetail={pokDetail ? { ...pokDetail } : []} />
             </div>
           </>
           )}

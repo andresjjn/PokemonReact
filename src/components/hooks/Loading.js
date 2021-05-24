@@ -5,7 +5,11 @@ export default function Loading () {
       src='https://i.pinimg.com/originals/66/89/dc/6689dc331be27e66349ce9a4d15ddff3.gif'
       alt='Loading'
       style={{
-        width: '30%'
+        width: '10%',
+        display: 'flex',
+        justifyContent: 'center',
+        alignContent: 'center',
+        top: '50%'
       }}
     />
   );
