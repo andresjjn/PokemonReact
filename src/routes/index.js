@@ -9,7 +9,7 @@ export default function Routes () {
   return (
     <Router>
       <Switch>
-        <Route path='/' exact>
+        <Route path='/PokemonReact/' exact>
           <Home />
         </Route>
         <Route path='/pokemon/:id'>

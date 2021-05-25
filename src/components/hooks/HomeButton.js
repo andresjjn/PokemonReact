@@ -4,7 +4,7 @@ export default function HomeButton () {
   return (
     <div className='header'>
       <button className='home-button'>
-        <Link to='/'>
+        <Link to='/PokemonReact/'>
           <img
             className='home-image'
             src='https://fontmeme.com/permalink/210512/7341a274c4b54aedea614c4d156ab7ec.png'
